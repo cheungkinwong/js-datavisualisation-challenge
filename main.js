@@ -21,7 +21,7 @@ for (let i = 2; i < table1.rows.length; i++) {
      let data = [];
      let rowJson = {
           label: country,
-          backgroundColor: "rgb(255,255,255,0)",
+          fill: false,
           borderColor: randomRGB,
           data: data
      };
@@ -30,7 +30,6 @@ for (let i = 2; i < table1.rows.length; i++) {
      }
      dataSet1.push(rowJson);
 }
-console.log(dataSet1);
 
 const canvas1 = document.createElement("canvas");
 canvas1.id = "myChart1";
@@ -48,7 +47,7 @@ var chart = new Chart(ctx, {
      options: {}
 });
 
-// graph2
+// graph2 v1
 
 // let years2 = [];
 // for (let i = 2; i < table2.rows[0].cells.length; i++) {
@@ -99,6 +98,7 @@ for (let i = 1; i < table2.rows.length; i++) {
      let country = tableRow.cells[1].innerHTML;
      country2.push(country);
 }
+country2[7] = "Angleterreet paysdeGalles(UK)";
 
 for (let i = 2; i < table2.rows[0].cells.length; i++) {
      let data2 = [];
@@ -136,5 +136,3 @@ var chart = new Chart(ctx2, {
      },
      options: {}
 });
-console.log(country2);
-console.log(dataSet2);
