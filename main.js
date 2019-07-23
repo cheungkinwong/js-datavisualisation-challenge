@@ -49,30 +49,72 @@ var chart = new Chart(ctx, {
 
 // graph2
 
-let years2 = [];
-for (let i = 2; i < table2.rows[0].cells.length; i++) {
-     years2[i - 2] = table2.rows[0].cells[i].innerHTML;
-}
+// let years2 = [];
+// for (let i = 2; i < table2.rows[0].cells.length; i++) {
+//      years2[i - 2] = table2.rows[0].cells[i].innerHTML;
+// }
+
+// let dataSet2 = [];
+// for (let i = 2; i < table2.rows.length; i++) {
+//      let randomRGB = getRandomRgb();
+//      let tableRow = table2.rows[i];
+//      let country = tableRow.cells[1].innerHTML;
+//      let data = [];
+//      let rowJson = {
+//           label: country,
+//           backgroundColor: randomRGB,
+//           data: data
+//      };
+//      for (let j = 2; j < tableRow.cells.length; j++) {
+//           data.push(parseInt(tableRow.cells[j].innerHTML));
+//      }
+//      console.log(rowJson);
+//      dataSet2.push(rowJson);
+// }
+// console.log(dataSet2);
+
+// const canvas2 = document.createElement("canvas");
+// canvas2.id = "myChart2";
+// table2.parentNode.insertBefore(canvas2, table2);
+// const ctx2 = document.getElementById("myChart2").getContext("2d");
+// ctx2.canvas.width = window.innerWidth;
+// ctx2.canvas.height = window.innerHeight;
+
+// var chart = new Chart(ctx2, {
+//      type: "bar",
+//      data: {
+//           labels: years2,
+//           datasets: dataSet2
+//      },
+//      options: {}
+// });
+
+// graph2 v2
 
 let dataSet2 = [];
-for (let i = 2; i < table2.rows.length; i++) {
+let country2 = [];
+for (let i = 2; i < table2.rows[0].cells.length; i++) {
+     let data2 = [];
+     let yearData1 = [];
+     let yearData2 = [];
+     data2.push(yearData1, yearData2);
+     for (let i = 2; i < table2.rows.length; i++) {
+          let tableRow = table2.rows[i];
+          let country = tableRow.cells[1].innerHTML;
+          yearData1.push(parseInt(tableRow.cells[2].innerHTML));
+          yearData2.push(parseInt(tableRow.cells[3].innerHTML));
+          country2.push(country);
+     }
+     let data = data2[i - 2];
      let randomRGB = getRandomRgb();
-     let tableRow = table2.rows[i];
-     let country = tableRow.cells[1].innerHTML;
-     let data = [];
+     let years2 = table2.rows[0].cells[i].innerHTML;
      let rowJson = {
-          label: country,
+          label: years2,
           backgroundColor: randomRGB,
-          //   borderColor: randomRGB,
           data: data
      };
-     for (let j = 2; j < tableRow.cells.length; j++) {
-          data.push(parseInt(tableRow.cells[j].innerHTML));
-     }
-     console.log(rowJson);
      dataSet2.push(rowJson);
 }
-console.log(dataSet2);
 
 const canvas2 = document.createElement("canvas");
 canvas2.id = "myChart2";
@@ -84,8 +126,10 @@ ctx2.canvas.height = window.innerHeight;
 var chart = new Chart(ctx2, {
      type: "bar",
      data: {
-          labels: years2,
+          labels: country2,
           datasets: dataSet2
      },
      options: {}
 });
+
+console.log(dataSet2);
