@@ -30,6 +30,7 @@ for (let i = 2; i < table1.rows.length; i++) {
      }
      dataSet1.push(rowJson);
 }
+console.log(dataSet1);
 
 const canvas1 = document.createElement("canvas");
 canvas1.id = "myChart1";
@@ -93,17 +94,21 @@ var chart = new Chart(ctx, {
 
 let dataSet2 = [];
 let country2 = [];
+for (let i = 1; i < table2.rows.length; i++) {
+     let tableRow = table2.rows[i];
+     let country = tableRow.cells[1].innerHTML;
+     country2.push(country);
+}
+
 for (let i = 2; i < table2.rows[0].cells.length; i++) {
      let data2 = [];
      let yearData1 = [];
      let yearData2 = [];
      data2.push(yearData1, yearData2);
-     for (let i = 2; i < table2.rows.length; i++) {
+     for (let i = 1; i < table2.rows.length; i++) {
           let tableRow = table2.rows[i];
-          let country = tableRow.cells[1].innerHTML;
           yearData1.push(parseInt(tableRow.cells[2].innerHTML));
           yearData2.push(parseInt(tableRow.cells[3].innerHTML));
-          country2.push(country);
      }
      let data = data2[i - 2];
      let randomRGB = getRandomRgb();
@@ -131,5 +136,5 @@ var chart = new Chart(ctx2, {
      },
      options: {}
 });
-
+console.log(country2);
 console.log(dataSet2);
