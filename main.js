@@ -101,13 +101,13 @@ async function getData() {
      const request = "https://canvasjs.com/services/data/datapoints.php";
      let response = await fetch(proxy + request);
      graphData = await response.json();
+     let randomRGB = getRandomRgb();
      let xAxis = [];
      let data3 = [];
      let graphJson = [
           {
                label: "crime",
-               fill: false,
-               borderColor: "rgb(228, 9, 9)",
+               backgroundColor: randomRGB,
                data: data3
           }
      ];
