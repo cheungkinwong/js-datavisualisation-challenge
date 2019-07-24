@@ -35,10 +35,8 @@ const canvas1 = document.createElement("canvas");
 canvas1.id = "myChart1";
 table1.parentNode.insertBefore(canvas1, table1);
 const ctx = document.getElementById("myChart1").getContext("2d");
-ctx.canvas.width = window.innerWidth;
-ctx.canvas.height = window.innerHeight;
 
-var chart = new Chart(ctx, {
+var chart1 = new Chart(ctx, {
      type: "line",
      data: {
           labels: years1,
@@ -47,49 +45,7 @@ var chart = new Chart(ctx, {
      options: {}
 });
 
-// graph2 v1
-
-// let years2 = [];
-// for (let i = 2; i < table2.rows[0].cells.length; i++) {
-//      years2[i - 2] = table2.rows[0].cells[i].innerHTML;
-// }
-
-// let dataSet2 = [];
-// for (let i = 2; i < table2.rows.length; i++) {
-//      let randomRGB = getRandomRgb();
-//      let tableRow = table2.rows[i];
-//      let country = tableRow.cells[1].innerHTML;
-//      let data = [];
-//      let rowJson = {
-//           label: country,
-//           backgroundColor: randomRGB,
-//           data: data
-//      };
-//      for (let j = 2; j < tableRow.cells.length; j++) {
-//           data.push(parseInt(tableRow.cells[j].innerHTML));
-//      }
-//      console.log(rowJson);
-//      dataSet2.push(rowJson);
-// }
-// console.log(dataSet2);
-
-// const canvas2 = document.createElement("canvas");
-// canvas2.id = "myChart2";
-// table2.parentNode.insertBefore(canvas2, table2);
-// const ctx2 = document.getElementById("myChart2").getContext("2d");
-// ctx2.canvas.width = window.innerWidth;
-// ctx2.canvas.height = window.innerHeight;
-
-// var chart = new Chart(ctx2, {
-//      type: "bar",
-//      data: {
-//           labels: years2,
-//           datasets: dataSet2
-//      },
-//      options: {}
-// });
-
-// graph2 v2
+// graph2
 
 let dataSet2 = [];
 let country2 = [];
@@ -125,10 +81,8 @@ const canvas2 = document.createElement("canvas");
 canvas2.id = "myChart2";
 table2.parentNode.insertBefore(canvas2, table2);
 const ctx2 = document.getElementById("myChart2").getContext("2d");
-ctx2.canvas.width = window.innerWidth;
-ctx2.canvas.height = window.innerHeight;
 
-var chart = new Chart(ctx2, {
+var chart2 = new Chart(ctx2, {
      type: "bar",
      data: {
           labels: country2,
@@ -136,3 +90,50 @@ var chart = new Chart(ctx2, {
      },
      options: {}
 });
+
+// graph3
+
+// setInterval(getData, 5000);
+getData();
+
+async function getData() {
+     const proxy = "https://cors-anywhere.herokuapp.com/";
+     const request = "https://canvasjs.com/services/data/datapoints.php";
+     let response = await fetch(proxy + request);
+     graphData = await response.json();
+     let xAxis = [];
+     let data3 = [];
+     let graphJson = [
+          {
+               label: "crime",
+               fill: false,
+               borderColor: "rgb(228, 9, 9)",
+               data: data3
+          }
+     ];
+
+     for (let i = 0; i < graphData.length; i++) {
+          let xdata;
+          let ydata;
+          let array = graphData[i];
+          xdata = array[0];
+          ydata = array[1];
+          xAxis.push(xdata.toString());
+          data3.push(ydata);
+     }
+
+     const header = document.getElementById("firstHeading");
+     const canvas3 = document.createElement("canvas");
+     canvas3.id = "myChart3";
+     header.appendChild(canvas3);
+     const ctx3 = document.getElementById("myChart3").getContext("2d");
+
+     var chart3 = new Chart(ctx3, {
+          type: "line",
+          data: {
+               labels: xAxis,
+               datasets: graphJson
+          },
+          options: {}
+     });
+}
