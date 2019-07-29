@@ -24,6 +24,7 @@ for (let i = 2; i < table1.rows.length; i++) {
           fill: false,
           borderColor: randomRGB,
           data: data
+          // hidden: true
      };
      for (let j = 2; j < tableRow.cells.length; j++) {
           data.push(parseInt(tableRow.cells[j].innerHTML));
@@ -94,19 +95,34 @@ var chart2 = new Chart(ctx2, {
 // graph3
 
 // setInterval(getData, 5000);
-getData();
 
-async function getData() {
-     const proxy = "https://cors-anywhere.herokuapp.com/";
-     const request = "https://canvasjs.com/services/data/datapoints.php";
-     let response = await fetch(proxy + request);
+const header = document.getElementById("firstHeading");
+const input3 = document.createElement("input");
+input3.id = "input3";
+input3.placeholder = "set amount of lines";
+header.appendChild(input3);
+
+const canvas3 = document.createElement("canvas");
+canvas3.id = "myChart3";
+header.appendChild(canvas3);
+input3.addEventListener("keyup", key => {
+     let lines = input3.value;
+     if (key.keyCode == 13) {
+          getData(lines);
+     }
+});
+
+// getData();
+async function getData(lines) {
+     const request = `https://becoderandomdata.000webhostapp.com/randomdata.php/?amount_of_lines=${lines}`;
+     let response = await fetch(request);
      graphData = await response.json();
      let randomRGB = getRandomRgb();
      let xAxis = [];
      let data3 = [];
      let graphJson = [
           {
-               label: "crime",
+               label: "teletubbies",
                backgroundColor: randomRGB,
                data: data3
           }
@@ -122,12 +138,7 @@ async function getData() {
           data3.push(ydata);
      }
 
-     const header = document.getElementById("firstHeading");
-     const canvas3 = document.createElement("canvas");
-     canvas3.id = "myChart3";
-     header.appendChild(canvas3);
      const ctx3 = document.getElementById("myChart3").getContext("2d");
-
      var chart3 = new Chart(ctx3, {
           type: "line",
           data: {
