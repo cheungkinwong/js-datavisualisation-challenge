@@ -24,7 +24,6 @@ for (let i = 2; i < table1.rows.length; i++) {
           fill: false,
           borderColor: randomRGB,
           data: data
-          // hidden: true
      };
      for (let j = 2; j < tableRow.cells.length; j++) {
           data.push(parseInt(tableRow.cells[j].innerHTML));
